@@ -5,24 +5,26 @@ import Link from 'next/link';
 import logo from '@/assets/images/logo.svg';
 import { FaUser, FaSignInAlt, FaSignOutAlt, FaBuilding } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-// import destroySession from '@/app/actions/destroySession';
-// import { useAuth } from '@/context/authContext';
+import destroySession from '@/app/actions/destroySession';
+import { useAuth } from '@/context/authContext';
+
+
 
 const Header = () => {
-  // const router = useRouter();
+  const router = useRouter();
 
-  // const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  
+  const handleLogout = async () => {
+    const { success, error } = await destroySession();
 
-  // const handleLogout = async () => {
-  //   const { success, error } = await destroySession();
-
-  //   if (success) {
-  //     setIsAuthenticated(false);
-  //     router.push('/login');
-  //   } else {
-  //     toast.error(error);
-  //   }
-  // };
+    if (success) {
+      setIsAuthenticated(false);
+      router.push('/login');
+    } else {
+      toast.error(error);
+    }
+  };
 
   return (
     <header className='bg-gray-100'>
@@ -46,7 +48,7 @@ const Header = () => {
                   Rooms
                 </Link>
                 {/* <!-- Logged In Only --> */}
-                {/* {isAuthenticated && (
+                {isAuthenticated && (
                   <>
                     <Link
                       href='/bookings'
@@ -61,7 +63,7 @@ const Header = () => {
                       Add Room
                     </Link>
                   </>
-                )} */}
+                )}
               </div>
             </div>
           </div>
@@ -69,7 +71,7 @@ const Header = () => {
           <div className='ml-auto'>
             <div className='ml-4 flex items-center md:ml-6'>
               {/* <!-- Logged Out Only --> */}
-              {/* {!isAuthenticated && (
+              {!isAuthenticated && (
                 <>
                   <Link
                     href='/login'
@@ -84,9 +86,9 @@ const Header = () => {
                     <FaUser className='inline mr-1' /> Register
                   </Link>
                 </>
-              )} */}
+              )}
 
-              {/* {isAuthenticated && (
+              {isAuthenticated && (
                 <>
                   <Link href='/rooms/my'>
                     <FaBuilding className='inline mr-1' /> My Rooms
@@ -98,7 +100,7 @@ const Header = () => {
                     <FaSignOutAlt className='inline mr-1' /> Sign Out
                   </button>
                 </>
-              )} */}
+              )}
             </div>
           </div>
         </div>
@@ -107,14 +109,14 @@ const Header = () => {
       {/* <!-- Mobile menu --> */}
       <div className='md:hidden'>
         <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
-          {/* <Link
+          <Link
             href='/'
             className='block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white'
           >
             Rooms
-          </Link> */}
+          </Link>
           {/* <!-- Logged In Only --> */}
-          {/* {isAuthenticated && (
+          {isAuthenticated && (
             <>
               <Link
                 href='/bookings'
@@ -129,7 +131,7 @@ const Header = () => {
                 Add Room
               </Link>
             </>
-          )} */}
+          )}
         </div>
       </div>
     </header>

@@ -18,12 +18,12 @@ const RoomPage = async ({ params }) => {
     return <Heading title='Room Not Found' />;
   }
 
-  // const bucketId = process.env.NEXT_PUBLIC_APPWRITE_STORAGE_BUCKET_ROOMS;
-  // const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT;
+  const bucketId = process.env.NEXT_PUBLIC_APPWRITE_STORAGE_BUCKET_ROOMS;
+  const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT;
 
-  // const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${room.image}/view?project=${projectId}`;
+  const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${room.image}/view?project=${projectId}`;
 
-  // const imageSrc = room.image ? imageUrl : '/images/no-image.jpg';
+  const imageSrc = room.image ? imageUrl : '/images/no-image.jpg';
 
   return (
     <>
@@ -40,8 +40,8 @@ const RoomPage = async ({ params }) => {
 
         <div className='flex flex-col sm:flex-row sm:space-x-6'>
           <Image
-            // src={imageSrc}
-            src={`/images/rooms/${room.image}`}
+            src={imageSrc}
+            // src={`/images/rooms/${room.image}`}
             alt={room.name}
             width={400}
             height={100}

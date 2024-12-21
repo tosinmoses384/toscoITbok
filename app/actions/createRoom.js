@@ -25,8 +25,8 @@ async function createRoom(previousState, formData) {
     if (image && image.size > 0 && image.name !== 'undefined') {
       try {
         // Upload
-        const response = await storage.createFile('rooms', ID.unique(), image);
-        imageID = response.$id;
+        const response = await storage.createFile('rooms', ID.unique(), image); // This will do the uploading
+        imageID = response.$id; // This will do the actual saving to the database
       } catch (error) {
         console.log('Error uploading image', error);
         return {
@@ -57,7 +57,7 @@ async function createRoom(previousState, formData) {
       }
     );
 
-    revalidatePath('/', 'layout');
+    revalidatePath('/', 'layout');  // BE VERY CAREFUL WITH THIS REVALIDATE
 
     return {
       success: true,
